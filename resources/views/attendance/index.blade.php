@@ -4,7 +4,7 @@
             {{ __('Attendance') }}
         </h2>
     </x-slot>
-
+    {{-- This is a test --}}
     <style>
         .card {
             margin-left: 200px;
