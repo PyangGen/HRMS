@@ -11,20 +11,23 @@ class Attendance extends Model
     use HasFactory;
 
     protected $fillable = [
+        'request_approved',
         'user_id',
         'time_in',
         'time_out',
+        'hours',
         'status',
         'request',
         'schedule',
-        'request_reason',
-        'request_approved'
+        'overtime_hours',
+        'request_reason'
+        
     ];
 
     protected $casts = [
         'time_in' => 'datetime',
         'time_out' => 'datetime',
-        'request_approved' => 'boolean'
+      
     ];
 
     protected $attributes = [
@@ -32,7 +35,10 @@ class Attendance extends Model
         'request' => 'none',
         'request_approved' => false
     ];
-
+    public function schedule()
+{
+    return $this->belongsTo(Schedule::class);
+}
     public function user()
     {
         return $this->belongsTo(User::class);

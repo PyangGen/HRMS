@@ -10,9 +10,22 @@ class Payroll extends Model
     use HasFactory;
     protected $table = 'payrolls';
     protected $fillable = [
-        'name',
+        'user_id',
+        'total_hours',
+        'salary_per_hour',
         'salary',
-        'bonus',
-        'pay_date'
+        'sss',
+        'pagibig',
+        'philhealth',
+        'other_deduction',
+        'total_deductions',
+        'net_salary',
     ];
+    public function user()
+{
+    return $this->belongsTo(User::class);
 }
+
+    
+}
+

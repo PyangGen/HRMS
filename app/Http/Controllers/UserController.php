@@ -12,13 +12,24 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('id', 'desc')->paginate(6);
-        $total = User::count();
-
-        $departments = Department::all(); // Fetch all departments
-        return view('admin.users.index', compact(['users', 'total', 'departments']));
+        $query = User::query();
+    
+        if ($request->has('search') && $request->search != '') {
+            $searchTerm = $request->search;
+    
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'like', "%{$searchTerm}%")
+                  ->orWhere('department', 'like', "%{$searchTerm}%");
+            });
+        }
+    
+        $users = $query->orderBy('id', 'desc')->paginate(8);
+        $total = $query->count();
+    
+        $departments = Department::all();
+        return view('admin.users.index', compact('users', 'total', 'departments'));
     }
     public function create()
     {

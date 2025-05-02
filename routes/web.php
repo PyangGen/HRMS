@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee/index');
     Route::get('/employee/profile', [EmployeeController::class, 'profile'])->name('employee/profile');
 
+
     Route::get('/leave/request', [LeaveRequestController::class, 'create'])->name('leave.create');
     Route::post('/leave/request', [LeaveRequestController::class, 'store'])->name('leave.store');
     Route::get('/leave/view', [LeaveRequestController::class, 'index'])->name('leave.index');
@@ -61,16 +62,25 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/attendances', [AttendanceController::class, 'adminIndex'])->name('admin/attendances');
     Route::get('admin/attendances/create', [AttendanceController::class, 'adminCreate'])->name('admin/attendances/create');
     Route::post('admin/attendances', [AttendanceController::class, 'adminStore'])->name('admin.attendances.store');
-    Route::get('admin/attendances/{id}/edit', [AttendanceController::class, 'adminEdit'])->name('admin.attendances.edit');
+    Route::get('admin/attendances/edit/{id}', [AttendanceController::class, 'adminEdit'])->name('admin/attendances/edit');
     Route::put('admin/attendances/{id}', [AttendanceController::class, 'adminUpdate'])->name('admin.attendances.update');
-    Route::delete('admin/attendances/{id}', [AttendanceController::class, 'adminDestroy'])->name('admin.attendances.destroy');
+    Route::delete('admin/attendances/delete/{id}', [AttendanceController::class, 'adminDestroy'])->name('admin/attendances/delete');
+    Route::get('/attendance/status', [AttendanceController::class, 'getStatus'])->name('attendance.status');
+    Route::put('admin/attendances/update-request-status/{id}', [AttendanceController::class, 'updateRequestStatus'])->name('attendance.updateRequestStatus');
+ 
+
 
     Route::get('admin/payrolls', [PayrollController::class, 'index'])->name('admin/payrolls');
     Route::get('admin/payrolls/create', [PayrollController::class, 'create'])->name('admin/payrolls/create');
     Route::post('admin/payrolls/save', [PayrollController::class, 'save'])->name('admin/payrolls/save');
     Route::get('admin/payrolls/edit/{id}', [PayrollController::class, 'edit'])->name('admin/payrolls/edit');
     Route::put('admin/payrolls/edit/{id}', [PayrollController::class, 'update'])->name('admin/payrolls/update');
-    Route::get('admin/payrolls/delete/{id}', [PayrollController::class, 'delete'])->name('admin/payrolls/delete');
+    Route::delete('admin/payroll/{id}', [PayrollController::class, 'destroy'])->name('admin/payroll/destroy');
+    Route::post('admin/payrolls/store', [PayrollController::class, 'store'])->name('admin/payrolls/store');
+    Route::get('/get-user-data/{id}', [App\Http\Controllers\PayrollController::class, 'getUserData']);
+    Route::get('admin.payroll.index', [PayrollController::class, 'index'])->name('admin.payroll.index');
+    
+
 
     Route::get('/admin/leave-requests', [LeaveRequestController::class, 'indexAll'])->name('admin.leave.view-all-leave-requests');
     Route::post('/admin/update-leave-requests', [LeaveRequestController::class, 'updateStatus'])->name('admin.leave.update-leave-status');
@@ -84,6 +94,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/schedules/{id}/{status}', [ScheduleController::class, 'updateStatus'])->name('admin/schedules/updateStatus');
     Route::get('/admin/schedules/approve/{id}', [ScheduleController::class, 'approve'])->name('admin/schedules/approve');
     Route::get('/admin/schedules/reject/{id}', [ScheduleController::class, 'reject'])->name('admin/schedules/reject');
+    Route::put('/admin/schedules/update', [ScheduleController::class, 'update'])->name('admin/schedules/update');
+    Route::get('/admin/schedules/delete/{id}', [ScheduleController::class, 'destroy'])->name('admin/schedules/delete');
 
 
 });

@@ -5,87 +5,82 @@ namespace App\Http\Controllers;
 use App\Models\Payroll;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use App\Models\Attendance;
+use Carbon\Carbon;
 class PayrollController extends Controller
 {
     public function index()
     {
-        $payrolls  = Payroll::orderBy('id', 'asc')->get();
         $total = Payroll::count();
-        return view('admin.payroll.index', compact(['payrolls', 'total']));
+        $users = User::where('usertype', 'user')->get(); // ← add this
+        $payrolls = Payroll::with('user')->orderBy('id', 'desc')->paginate(8);
+
+        return view('admin.payroll.index', compact('payrolls', 'total', 'users'));
     }
+    
     public function create()
     {
         $users = User::where('usertype', 'user')->get();
         return view('admin.payroll.create', compact('users'));
     }
-    public function save(Request $request)
+    public function store(Request $request)
     {
-        $validation = $request->validate([
-            'name' => 'required|exists:users,name',
-            'salary' => 'required|numeric|min:1000',
-            'bonus' => 'nullable|numeric|min:500',
-            'pay_date' => 'required|date'
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'total_hours' => 'required|numeric',
+            'salary_per_hour' => 'required|numeric',
+            // other validation...
         ]);
-        $users = User::where('name', $validation['name'])
-            ->where('usertype', 'user')
+    
+        // Get current payroll month and year
+        $now = Carbon::now();
+        $month = $now->month;
+        $year = $now->year;
+    
+        // Check if payroll already exists for the user for the current month/year
+        $existingPayroll = Payroll::where('user_id', $request->user_id)
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
             ->first();
-        ;
-        if (!$users) {
-            return redirect()->route('admin/payrolls/create')->with('error', 'Invalid user selection.');
+    
+        if ($existingPayroll) {
+            return back()->with('error', 'Payroll for this employee already exists for this month.');
         }
-        $payDate = $validation['date'] ?? now()->toDateString();
-        $payroll = Payroll::create([
-            'name' => $users->name,
-            'salary' => $validation['salary'],
-            'bonus' => $validation['bonus'] ?? 0,
-            'pay_date' => $payDate,
+    
+        // Proceed to store the payroll if no duplicate
+        Payroll::create([
+            'user_id' => $request->user_id,
+            'total_hours' => $request->total_hours,
+            'salary_per_hour' => $request->salary_per_hour, // <-- add this line
+            'salary' => $request->total_hours * $request->salary_per_hour,
+            'total_deductions' => $request->total_deductions,
+            'net_salary' => $request->net_salary,
         ]);
-        if ($payroll) {
-            session()->flash('success', 'Payroll Added Successfully');
-            return redirect(route('admin/payrolls'));
-        } else {
-            session()->flash('error', 'Some problem occure');
-            return redirect(route('admin/payrolls/create'));
-        }
+        
+    
+        return back()->with('success', 'Payroll added successfully!');
     }
-    public function edit($id)
-    {
-        $payrolls = Payroll::findOrFail($id);
-        $users = User::where('usertype', 'user')->get();
-        return view('admin.payroll.update', compact('payrolls', 'users'));
-    }
-    public function update(Request $request, $id)
-    {
-        $validation = $request->validate([
-            'salary' => 'required|numeric|min:1000',
-            'bonus' => 'nullable|numeric|min:500',
-            'pay_date' => 'required|date',
-        ]);
-        $payrolls = Payroll::findOrFail($id);
+    
+    
+public function getUserData($id)
+{
+    $user = User::findOrFail($id);
 
-        $payrolls->salary = $validation['salary'];
-        $payrolls->bonus = $validation['bonus'];
-        $payrolls->pay_date = $validation['pay_date'];
-        $updated = $payrolls->save();
-        if ($updated) {
-            session()->flash('success', 'Payroll Updated Successfully');
-            return redirect(route('admin/payrolls'));
-        } else {
-            session()->flash('error', 'Some problem occure');
-            return redirect(route('admin/payrolls/update'));
-        }
-    }
-    public function delete($id)
-    {
-        $payrolls = Payroll::findOrFail($id)->delete();
+    // Sum total hours from attendances table
+    $totalHours = Attendance::where('user_id', $id)->sum('hours');
 
-        if ($payrolls) {
-            session()->flash('success', 'Payroll Deleted Successfully');
-            return redirect(route('admin/payrolls'));
-        } else {
-            session()->flash('error', 'Payroll not delete successfully');
-            return redirect(route('admin/payrolls'));
-        }
-    }
+    return response()->json([
+        'name' => $user->name,
+        'total_hours' => $totalHours
+    ]);
+}
+public function destroy($id)
+{
+    $payroll = Payroll::findOrFail($id);
+    $payroll->delete();
+
+    return response()->json(['message' => 'Payroll deleted successfully.']);
+}
+
+
 }

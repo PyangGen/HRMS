@@ -468,7 +468,8 @@ body, .container {
 .pagination a, 
 .pagination span {
     color: #1E1E8F !important; /* Change text color */
-    margin-left: 1000px;
+    margin-left: 1020px;
+    margin-top: -40px;
 }
 
 .pagination .active span {
@@ -511,7 +512,9 @@ body, .container {
 .edit-inputdd::placeholder {
     color: #999;
 }
-
+.total{
+    margin-left: 10px;
+}
 
 </style>
 <x-app-layout>
@@ -519,7 +522,7 @@ body, .container {
         <div class="dashboard-content">
             <div class="header">
                 <img src="{{ asset('images/department_blue.png') }}" alt="Product Icon">
-                <h1>Departments List</h1>
+                <h1>Department List</h1>
             </div>
         </div>
         <button class="add-button" data-bs-toggle="offcanvas" data-bs-target="#addDepartmentModal">
@@ -560,9 +563,12 @@ body, .container {
             </div>
         @empty
             <tr>
-                <td class="text-center">Department not found</td>
+                <p class="text-center">Department not found</p>
             </tr>
         @endforelse
+        <div class="total">
+                        <p>Total Records: <strong>{{ $total }}</strong></p>
+                    </div>
         <div class="pagination">
             {{ $departments->links() }}
         </div>

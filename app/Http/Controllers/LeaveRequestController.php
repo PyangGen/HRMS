@@ -37,27 +37,53 @@ class LeaveRequestController extends Controller
 
     /**
      * Store the leave request in the database.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'leave_type' => 'required|string|max:255',
-            'start_date' => 'required|date|after_or_equal:today',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'reason' => 'required|string|max:500',
-        ]);
+     */public function store(Request $request)
+{
+    $request->validate([
+        'leave_type' => 'required|string|max:255',
+        'start_date' => 'required|date|after_or_equal:today',
+        'end_date' => 'required|date|after_or_equal:start_date',
+        'reason' => 'required|string|max:500',
+    ]);
 
-        LeaveRequest::create([
-            'user_id' => Auth::id(),
-            'leave_type' => $request->leave_type,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'reason' => $request->reason,
-            'status' => 'Pending',
-        ]);
+    $userId = Auth::id();
+    $start = \Carbon\Carbon::parse($request->start_date);
+    $end = \Carbon\Carbon::parse($request->end_date);
 
-        return redirect()->route('leave.create')->with('success', 'Leave request submitted successfully!');
+    // 1. Check max date range (7 days including start and end date)
+    if ($start->diffInDays($end) + 1 > 7) {
+        return back()->withErrors([
+            'end_date' => 'You can only request up to 7 consecutive leave days.'
+        ])->withInput();
     }
+
+    // 2. Check monthly leave request count
+    $month = $start->month;
+    $year = $start->year;
+
+    $monthlyLeaveCount = LeaveRequest::where('user_id', $userId)
+        ->whereMonth('start_date', $month)
+        ->whereYear('start_date', $year)
+        ->count();
+
+    if ($monthlyLeaveCount >= 3) {
+        return back()->withErrors([
+            'start_date' => 'You have reached the maximum of 3 leave requests for this month.'
+        ])->withInput();
+    }
+
+    // Save the leave request
+    LeaveRequest::create([
+        'user_id' => $userId,
+        'leave_type' => $request->leave_type,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'reason' => $request->reason,
+        'status' => 'Pending',
+    ]);
+
+    return redirect()->route('leave.create')->with('success', 'Leave request submitted successfully!');
+}
 
     /**
      * View all leave requests of the logged-in employee.

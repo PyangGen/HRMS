@@ -13,11 +13,20 @@ return new class extends Migration
     {
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->decimal('salary', 10, 2);
-            $table->decimal('bonus', 10, 2)->default(0);
-            $table->date('pay_date');
+            $table->unsignedBigInteger('user_id'); // ← ADD THIS
+            $table->decimal('total_hours', 8, 2);   // ← ADD THIS
+            $table->decimal('salary_per_hour', 8, 2); // ← ADD THIS
+            $table->decimal('salary', 10, 2);       // ← ADD THIS
+            $table->decimal('sss', 10, 2)->default(0);
+            $table->decimal('pagibig', 10, 2)->default(0);
+            $table->decimal('philhealth', 10, 2)->default(0);
+            $table->decimal('other_deduction', 10, 2)->default(0);
+            $table->decimal('total_deductions', 10, 2); // ← ADD THIS
+            $table->decimal('net_salary', 10, 2);   // ← ADD THIS
             $table->timestamps();
+
+            // Optional: Add foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,3 +38,4 @@ return new class extends Migration
         Schema::dropIfExists('payrolls');
     }
 };
+

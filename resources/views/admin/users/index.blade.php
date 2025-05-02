@@ -6,14 +6,14 @@
     body {
         overflow: hidden;
         /* Disable scrolling */
-        height: 100%;
+       
         /* Ensure the body and html take up full height */
     }
 
     .main-content {
         margin-left: 250px;
-        padding-left: 70px;
-        padding-right: 70px;
+        padding-left: 65px;
+        padding-right: 55px;
         width: calc(100% - 250px);
         /* Adjust width to account for margin */
         min-height: 100vh;
@@ -22,20 +22,17 @@
         /* Prevent content overflow */
     }
 
-    .dashboard-content {
-        margin-top: 30px;
-
-    }
+   
 
     /* Header */
     .header {
         display: flex;
         align-items: center;
-        margin-top: 10px;
+      
     }
 
     .header h1 {
-        margin-top: 30px;
+        margin-top: 5px;
         color: #1E1E8F;
         /* Blue color for the text */
         font-size: 1.5em;
@@ -53,165 +50,277 @@
 
     .header img {
         width: 40px;
-        margin-top: 20px;
+        margin-top: -5px;
+        margin-left: 10px;
 
     }
 
     .search-bar {
-        width: 100%;
-        margin-top: -30px;
-        position: relative;
-
-
-    }
-
-    .search-bar input[type="text"] {
-        width: 50%;
-        padding: 15px 20px 15px 70px;
-        /* Increase left padding to accommodate the larger icon */
-        border: 1px solid #ccc;
-        border-radius: 50px;
-        font-size: 1em;
-        outline: none;
-        color: #333;
-        transition: border-color 0.3s, color 0.3s;
-        font-family: 'Poppins', sans-serif;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
-
-        /* Icon Styling */
-        background-image: url('{{ asset("images/search.gif") }}');
-        background-size: 120px 80px;
-        /* Increase the size of the icon */
-        background-repeat: no-repeat;
-        background-position: -10px;
-        /* Position icon with some space from the left edge */
-    }
-
-    .cardN {
-        background-color: #ffffff;
-        padding: 15px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr auto  auto auto ;
-        align-items: center;
-        column-gap: 25px;
-        width: 100.5%;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-        margin: 10px 0;
-    }
-
-    /* Card L Style (for profile and others) */
-    .cardL {
-        background-color: #ffffff;
-        padding: 15px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        width: 100.5%;
-        display: grid;
-        grid-template-columns: repeat(8, 1fr) min-content;
-        align-items: center;
-        column-gap: 40px;
-        margin-bottom: 10px;
-        font-family: 'Poppins', sans-serif;
-        box-sizing: border-box;
-    }
-    .cardN div,
-.cardL div {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+    margin-left: 10px;
+    
 }
 
-.cardL select {
-    width: 100%; /* Let it fill its column */
-    max-width: 120px; /* Force it to behave like other columns */
-    padding: 4px;
-    box-sizing: border-box;
-}
-
-
-    /* Align content text inside cards */
-    .cardN div,
-    .cardL div,
-    .cardN label,
-    .cardL label {
-        text-align: left;
-    }
-
-    /* Dropdown Styling */
-    .cardL select {
-        width: 100%;
-        max-width: 150px;
-        padding: 5px;
-    }
-
-    /* Profile Icon Styling */
-    .cardL .product-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-    }
-
-    /* Responsive Grid Adjustments */
-    @media (max-width: 1200px) {
-
-        .cardN,
-        .cardL {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-
-    @media (max-width: 768px) {
-
-        .cardN,
-        .cardL {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .cardL select {
-            width: 100%;
-        }
-    }
-
-    @media (max-width: 480px) {
-
-        .cardN,
-        .cardL {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .btn-group {
-    gap: 10px; /* Space between Edit and Delete */
-}
-
-
-    .edit-btn {
-    background-color: #18a74f;
+.search-bar input[type="text"] {
+    width: 100%;
+    padding: 14px 50px 14px 20px;
     border: none;
-    border-radius: 20px;
-    color: white;
-    padding: 6px 30px;
+    border-radius: 50px;
+    font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    text-decoration: none;
-    text-align: center;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.search-bar button {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    background: #a4a4a4;
+    border: none;
+    padding: 0 20px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-bar button:hover {
+    background: #1E1E8F ;
+}
+
+.search-bar button svg {
+    fill: white;
+}
+
+
+    .cardL {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 20px 15px;
+    width: 265px; /* Static width */
+    height: 300px; /* Static height for uniformity */
+    margin: 10px;
     display: inline-block;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.cardL::after {
+    content: '⋮';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+}
+
+
+.cardL-header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left:75px;
+    border: 3px solid #eee;
+    margin-top: -10px;
+}
+
+label {
+    display: block;
+    margin: 4px 0;
+    font-size: 14px;
+    color: #333;
+    word-wrap: break-word;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 16px;
+  
+}
+
+.relative select {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+label {
+    display: block;
+    margin: 4px 0;
+    font-size: 14px;
+    color: #333;
+    word-wrap: break-word;
+}
+.napo {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;    /* Center horizontally */
+    text-align: center;
+    margin: 10px 0;
+}
+
+.napo label {
+    font-size: 14px;
+    color: #333;
+    margin: 2px 0;
+}
+
+.napo .user-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #222;
+}
+
+
+.dgc {
+    display: flex;
+    flex-direction: column;  /* Stack vertically */
+    align-items: flex-start; /* Align text to the left */
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    padding: 6px 15px;      /* Add padding for nicer look */
+                  /* Space between labels */
+}
+
+.dgc label {
+    text-align: left;
+    width: 100%;             /* Ensure full width for text-align */
+}
+.email-label {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* spacing between icon and text */
+    font-size: 14px;
+    color: #333;
+}
+.email-label svg {
+    flex-shrink: 0; /* keeps icon from shrinking */
+}
+.phone-label {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* spacing between icon and number */
+    font-size: 14px;
+    color: #333;
+}
+
+.phone-label img {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.relative select {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+label {
+    display: block;
+    margin: 4px 0;
+    font-size: 14px;
+    color: #333;
+    word-wrap: break-word;
+}
+
+.relative select {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+
+/* Font Awesome icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+
+.edit-btn,
+.delete-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 0; /* Remove horizontal padding to maintain circle */
+    color: #fff;
+    border: none;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.edit-btn:hover {
+    background-color: #148c44;
+}
+
+.delete-btn:hover {
+    background-color: #8d0000;
+}
+/* Keep individual colors */
+.edit-btn {
+    background-color: #18a74f;
 }
 
 .delete-btn {
     background-color: #AF0000;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    padding: 6px 20px;
-    font-family: 'Poppins', sans-serif;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
-   
+}
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap; /* ensures responsiveness on small screens */
 }
 
+/* No need for big margin here anymore */
+.usertypes {
+    display: flex;
+    align-items: center;
+}
+
+.usertypes select {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+/* Adjust this only if needed */
+.btn-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
     .add-button {
         background-color: #1E1E8F;
@@ -643,7 +752,8 @@
     .pagination span {
         color: #1E1E8F !important;
         /* Change text color */
-        margin-left: 1020px;
+        margin-left: 1015px;
+        margin-top: -40px;
     }
 
     .pagination .active span {
@@ -731,8 +841,13 @@
 .custom-select::-ms-expand {
   display: none;
 }
-
-
+.custom-select:hover {
+    background-color: #1E1E8F;
+    color: white;
+}
+.total{
+    margin-left: 10px;
+}
 </style>
 <?php
 
@@ -741,9 +856,18 @@ use Illuminate\Support\Facades\Storage;
 <x-app-layout>
     <div class="main-content">
         <div class="dashboard-content">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search employee">
-        </div>
+        <form method="GET" action="{{ route('admin/users') }}">
+    <div class="search-bar">
+        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search...">
+        <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 
+                1.415-1.414l-3.85-3.85zm-5.242 1.156a5 5 0 1 
+                1 0-10 5 5 0 0 1 0 10z"/>
+            </svg>
+        </button>
+    </div>
+</form>
 
             <!-- Header -->
             <div class="header">
@@ -762,47 +886,34 @@ use Illuminate\Support\Facades\Storage;
                 {{ Session::get('success') }}
             </div>
         @endif
-
-
-
-        <div class="cardN">
-            <label>Profile</label>
-            <label>Name</label>
-            <label>Email</label>
-            <label>Type</label>
-            <label>Department</label>
-            <label>Position</label>
-            <label>Gender</label>
-            <label>Contact #</label>
-            <label>Action</label>
-        </div>
         @forelse($users as $user)
             <div class="cardL">
-            <label>
-                    @if($user->image && Storage::disk('public')->exists($user->image))
-            <img src="{{ asset('storage/' . $user->image) }}" width="80" alt="Profile Image">
-        @else
-            <img src="{{ asset('images/default.jpg') }}" width="80" alt="No Image">
-        @endif
-
-</label>
-
+            <div class="cardL-header">
+                @if($user->image && Storage::disk('public')->exists($user->image))
+                    <img src="{{ asset('storage/' . $user->image) }}" alt="Profile Image">
+                @else
+                    <img src="{{ asset('images/default.jpg') }}" alt="No Image">
+                @endif
+            </div>  
+                <div class="napo">
                 <label class="user-name">{{ $user->name }}</label> <!-- Add a class to make it easy to select in JS -->
-                <label>{{ $user->email }}</label>
-                <label>
-                <div class="relative w-full max-w-[150px]">
-                    <select class="custom-select w-full border border-gray-300 rounded px-3 py-2 userTypeChange" data-user-id="{{ $user->id }}">
+                <label class="department">{{ $user->position }}, {{ $user->department }}</label>
+                </div>
+                <div class="dgc">
+                <label class="email-label"><img src="{{ asset('images/envelope.svg') }}"/>{{ $user->email }}</label>
+                <label class="phone-label">
+                    <img src="{{ asset('images/telephone.svg') }}" />
+                    <span>+639{{ $user->contact_number }}</span>
+                </label>
+
+                </div>
+                <div class="action-row">
+                <div class="usertypes">
+                    <select class="custom-select border border-gray-300 rounded px-3 py-2 userTypeChange" data-user-id="{{ $user->id }}">
                         <option value="user" {{ $user->usertype == 'user' ? 'selected' : '' }}>Employee</option>
                         <option value="admin" {{ $user->usertype == 'admin' ? 'selected' : '' }}>Admin</option>
                     </select>
                     </div>
-
-                </label>
-                <label>{{ $user->department }}</label>
-                <label>{{ $user->position }}</label>
-                <label>{{ $user->gender }}</label>
-                <label>{{ $user->contact_number }}</label>
-
                 <div class="btn-group">
                     <button class="edit-btn" data-bs-toggle="modal" data-bs-target="#editEmployeeModal"
                         data-id="{{ $user->id }}" 
@@ -812,21 +923,27 @@ use Illuminate\Support\Facades\Storage;
                         data-position="{{ $user->position }}"
                         data-gender="{{ $user->gender }}" 
                         data-contact-number="{{ $user->contact_number }}">
-                        Edit
+                        
                     </button>
 
                     <a href="#" class="delete-btn" data-user-id="{{ $user->id }}" data-user-name="{{ $user->name }}">
-                        Delete
+                       
                     </a>
+                </div>
                 </div>
             </div>
         @empty
             <p>No users found.</p>
         @endforelse
+  
 
-        <div class="pagination">
-            {{ $users->links() }}
+        <div class="total">
+            <p>Total Records: <strong>{{ $total }}</strong></p>
         </div>
+        <div class="pagination">
+            {{ $users->appends(request()->query())->links() }}
+        </div>
+
 
         <!-- User Type Change Modal -->
         <div class="modal fade" id="userTypeChangeModal" tabindex="-1" aria-hidden="true">
@@ -990,21 +1107,26 @@ use Illuminate\Support\Facades\Storage;
                     }, 5000);
                 }
             });
-
             document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById("searchInput");
-        const cards = document.querySelectorAll(".cardL");
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll(".cardL");
 
-        searchInput.addEventListener("keyup", function () {
-            const searchTerm = searchInput.value.toLowerCase();
+    searchInput.addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
 
-            cards.forEach(card => {
-                const userName = card.querySelector(".user-name").textContent.toLowerCase();
-                card.style.display = userName.includes(searchTerm) ? "grid" : "none";
-            });
+        cards.forEach(card => {
+            const name = card.querySelector(".user-name")?.textContent.toLowerCase() || "";
+            const shiftInfo = card.querySelector(".department")?.textContent.toLowerCase() || "";
+
+            // Combine all searchable fields
+            const fullText = `${name} ${shiftInfo}`;
+
+            // Show/hide based on search match
+            card.style.display = fullText.includes(searchTerm) ? "grid" : "none";
+
         });
     });
-
+});
 
 
         </script>

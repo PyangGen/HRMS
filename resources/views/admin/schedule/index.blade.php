@@ -29,7 +29,7 @@
     .header {
         display: flex;
         align-items: center;
-        margin-top: 10px;
+        margin-top: -10px;
     }
 
     .header h1 {
@@ -78,7 +78,7 @@
         padding: 15px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         display: grid;
-        grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr auto auto;
+        grid-template-columns: 2fr 2fr 2fr 2fr 2fr auto auto;
         align-items: center;
         column-gap: 10px;
         width: 100.5%;
@@ -94,7 +94,7 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         width: 100.5%;
         display: grid;
-        grid-template-columns: 2fr 2fr 2fr 2fr 2fr 1fr auto auto;
+        grid-template-columns:  2fr 2fr 2fr 2fr 2fr auto auto;
         align-items: center;
         column-gap: 10px;
         margin-bottom: 10px;
@@ -124,34 +124,6 @@
         border-radius: 50%;
     }
 
-    /* Responsive Grid Adjustments */
-    @media (max-width: 1200px) {
-
-        .cardN,
-        .cardL {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-
-    @media (max-width: 768px) {
-
-        .cardN,
-        .cardL {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .cardL select {
-            width: 100%;
-        }
-    }
-
-    @media (max-width: 480px) {
-
-        .cardN,
-        .cardL {
-            grid-template-columns: 1fr;
-        }
-    }
     .offcanvas-end {
     width: 400px; /* Adjust width as needed */
     border-top-left-radius: 30px;
@@ -302,12 +274,242 @@
     gap: 10px; /* Space between Edit and Delete */
 }
 
+.hide {
+    display: none !important;
+}
+    /* Ensure labels and inputs are aligned properly */
+    .input-groupedit {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* Space between label & input */
+        width: 100%;
+        /* Take full width */
+    }
+    .modal-content {
+        border-radius: 20px !important;
+        /* Smooth rounded corners */
+        overflow: hidden;
+        /* Prevents content from overflowing */
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        /* Adjust this value to match your image size */
+    }
+    .input-label {
+        font-size: 14px;
+        color: #333;
+        font-weight: bold;
+        white-space: nowrap;
+        /* Prevent label from breaking */
+        min-width: 100px;
+        /* Give labels a consistent width */
+        font-weight: bold;
+        /* Bold labels for clarity */
+        text-align: left;
+        /* Align text to the left */
+    }
+
+    .edit-input {
+        width: 100% !important;
+        /* Ensure all inputs have the same width */
+        max-width: 100% !important;
+        /* Prevent any shrinking */
+        border: 2px solid #ccc !important;
+        /* Default gray border */
+        border-radius: 8px !important;
+        /* Rounded corners */
+        padding: 10px !important;
+        /* Consistent padding */
+        font-size: 14px !important;
+        /* Maintain uniform text size */
+        transition: border 0.2s ease-in-out;
+        /* Smooth transition */
+        display: block;
+        /* Ensures it takes full width */
+    }
+
+    .edit-input:focus {
+        border: 2px solid #1E1E8F !important;
+        /* Apply red border on focus */
+        outline: none !important;
+        /* Remove default browser outline */
+        box-shadow: none !important;
+        /* Remove blue glow */
+    }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        /* Keeps the buttons aligned */
+        align-items: center;
+        /* Centers them vertically */
+        gap: 10px;
+        /* Adds space between the buttons */
+        margin-top: 15px;
+        /* Space from input fields */
+
+    }
+       /* Keeps original width */
+       .update-button {
+        width: 70%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 12px;
+        color: white;
+        background-color: #18a74f;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .cancel-button {
+        width: 30%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 12px;
+        color: white;
+        background-color: #af0000;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Hover effects */
+    .update-button:hover {
+        background-color: #14813b;
+    }
+
+    .cancel-button:hover {
+        background-color: #8b0000;
+    }
+    .delete-buttonn {
+        width: 63%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        color: white;
+        margin-left: 15PX;
+        margin-right: -10px;
+        background-color: #18a74f;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-decoration: none;
+        text-align: center;
+
+    }
+
+    .cancell-button {
+        width: 26%;
+        padding: 10px;
+        border: 1px solid black;
+        /* Ensure black border */
+        border-radius: 8px;
+        font-size: 13px;
+        color: black;
+        margin-right: 15px;
+        background-color: none;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Hover effects */
+    .delete-buttonn:hover {
+        background-color: #14813b;
+    }
+    .cancell-button:hover {
+        background-color: #8b0000;
+        color: white;
+        border: none;
+    }
+    .total{
+    margin-left: 10px;
+}
+.pagination a, 
+.pagination span {
+    color: #1E1E8F !important; /* Change text color */
+    margin-left: 1020px;
+    margin-top: -40px;
+}
+
+.pagination .active span {
+    background-color: #1E1E8F !important; /* Active background */
+    border-color: #1E1E8F !important;
+    color: white !important; /* Active text color */
+}
+
+.pagination a:hover {
+    background-color: #1E1E8F !important;
+    color: white !important;
+    border-color: #1E1E8F !important;
+}
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    
+}
+
+.search-bar input[type="text"] {
+    width: 100%;
+    padding: 14px 50px 14px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.search-bar button {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    background: #a4a4a4;
+    border: none;
+    padding: 0 20px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-bar button:hover {
+    background: #1E1E8F ;
+}
+
+.search-bar button svg {
+    fill: white;
+}
 
 
+    
 </style>
 <x-app-layout>
 <div class="main-content">
         <div class="dashboard-content">
+        <form method="GET" action="{{ route('admin/schedules') }}">
+    <div class="search-bar">
+        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search...">
+        <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 
+                1.415-1.414l-3.85-3.85zm-5.242 1.156a5 5 0 1 
+                1 0-10 5 5 0 0 1 0 10z"/>
+            </svg>
+        </button>
+    </div>
+</form>
+
             <!-- Header -->
             <div class="header">
                 <img src="{{ asset('images/schedule_blue.png') }}" alt="Product Icon">
@@ -331,33 +533,28 @@
             <label>Employee Name</label>
             <label>Time In</label>
             <label>Time Out</label>
-            <label>Shift Type</label>
-            <label>Status</label>
-            <label>Request</label>
+            <label>Schedule</label>
             <label>Action</label>
         </div>
 
         @forelse($schedules as $sched)
             <div class="cardL">
                 
-               <label>{{ $sched->user->name }}</label>
+               <label class="user-name">{{ $sched->user->name }}</label>
                <label>{{ \Carbon\Carbon::parse($sched->shift_start)->timezone('Asia/Manila')->format('g:i A') }}</label>
                 <label>{{ \Carbon\Carbon::parse($sched->shift_end)->timezone('Asia/Manila')->format('g:i A') }}</label>
-
-                <label>{{ucfirst($sched->shift_type) }}</label>
-                <label>{{ $sched->shift }}</label>
-               
-                
-
+                <label class="shift-info">{{ $sched->shift }} / {{ ucfirst($sched->schedule) }}</label> <!-- Add class here -->
                 <div class="btn-group">
-                    <button class="edit-btn" data-bs-toggle="modal" data-bs-target="#editEmployeeModal"
+                <button class="edit-btn" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#editScheduleModal"
                         data-id="{{ $sched->id }}" 
-                        data-name="{{ $sched->name }}" 
-                        data-shift_start="{{ $sched->shift_start }}"
-                        data-shift_end="{{ $sched->shift_end }}"
-                        data-shift_type="{{ $sched->schedule }}"
+                        data-user-id="{{ $sched->user_id }}" 
+                        data-user-name="{{ $sched->user->name }}" {{-- 👈 Add this --}}
                         data-shift="{{ $sched->shift }}" 
-                        >
+                        data-shift-type="{{ $sched->schedule }}" 
+                        data-shift-start="{{ $sched->shift_start }}" 
+                        data-shift-end="{{ $sched->shift_end }}">
                         Edit
                     </button>
 
@@ -367,32 +564,42 @@
 
                 </div>
             </div>
-
         @empty
             <div class="text-center">No schedules found</div>
         @endforelse
+        <div class="total">
+                        <p>Total Records: <strong>{{ $total }}</strong></p>
+                    </div>
+                    <div class="pagination">
+    {{ $schedules->appends(request()->query())->links() }}
+</div>
+
    
        
 <!-- Add Schedule Off-Canvas Modal -->
-<div class="offcanvas offcanvas-end @if ($errors->any() || session()->has('error')) show @endif" tabindex="-1" id="addScheduleModal" aria-labelledby="addScheduleLabel" data-bs-backdrop="static">
+<div class="offcanvas offcanvas-end @if (($errors->any() && session('form_error') === 'add') || session('form_error') === 'add') show @endif"
+ tabindex="-1" id="addScheduleModal" aria-labelledby="addScheduleLabel" data-bs-backdrop="static">
     <div class="offcanvas-header">
         <button type="button" class="back-add" data-bs-dismiss="offcanvas">
             <img src="{{ asset('images/back_arrow.png') }}" class="img-add" alt="Back Arrow"/>
             Back
         </button>
     </div>
-    <h5 class="offcanvas-title" id="addScheduleLabel">Add Schedule</h5>
-    <div class="offcanvas-body">
-    
-        @if (session()->has('error'))
+            <h5 class="offcanvas-title" id="addScheduleLabel">Add Schedule</h5>
+            <div class="offcanvas-body">
+                @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if ($errors->has('duration'))
             <div class="alert alert-danger">
-                {{ session('error') }}
+                {{ $errors->first('duration') }}
             </div>
         @endif
-
         <form action="{{ route('admin/schedules/store') }}" method="POST">
                         @csrf
-
+                        <input type="hidden" name="form_type" value="add"> <!-- Hidden input to identify this form -->
                         <div class="mb-4 input-group" >
                             <label for="user_id" >Select Employee</label>
                             <select name="user_id" id="user_id" >
@@ -407,6 +614,7 @@
 
                         <div class="mb-4 input-group">
                                 <label for="shift">Shift</label>
+                                <input type="hidden" name="schedule" id="schedule">
                                 <select name="shift" id="shift">
                                     <option value="full-time">Full-time</option>
                                     <option value="part-time">Part-time</option>
@@ -421,7 +629,7 @@
                             <select name="shift_type" id="shift_type">
                                 <option value="morning">Morning Shift</option>
                                 <option value="afternoon">Afternoon Shift</option>
-                                <option value="night">Night Shift</option>
+                                <option value="evening">Evening Shift</option>
                             </select>
                             @error('shift_type')
                             <span class="text-danger">{{ $message }}</span>
@@ -429,7 +637,7 @@
                         </div>
 
                         <div class="mb-4 input-group">
-                            <label for="shift_start">Shift Start Time</label>
+                            <label for="shift_start">Start Time</label>
                             <input type="time" name="shift_start" id="shift_start" required>
                             @error('shift_start')
                             <span class="text-danger">{{ $message }}</span>
@@ -437,7 +645,7 @@
                         </div>
 
                         <div class="mb-4 input-group">
-                            <label for="shift_end">Shift End Time</label>
+                            <label for="shift_end">End Time</label>
                             <input type="time" name="shift_end" id="shift_end" required>
                             @error('shift_end')
                             <span class="text-danger">{{ $message }}</span>
@@ -449,12 +657,425 @@
     </div>
 </div>
 
-        </div>
+<!-- Edit Schedule Modal -->
+<div class="modal fade @if ($errors->any() && session('form_error') === 'edit') show @endif"
+     id="editScheduleModal"
+     tabindex="-1"
+     aria-labelledby="editScheduleModalLabel"
+     aria-hidden="true"
+     @if ($errors->any() && session('form_error') === 'edit') style="display:block;" @endif>
 
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            <form id="editScheduleForm" method="POST" action="{{ route('admin/schedules/update') }}">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="form_type" value="edit"> <!-- Hidden input to identify this form -->
+                    <input type="hidden" name="id" id="editScheduleId" value="{{ old('id') }}">
+                    <div class="mb-3 input-groupedit">
+                        <label class="input-label">Employee</label>
+                        <input type="text" id="editUserName" class="edit-input" disabled value="{{ session('user_name', old('user_name')) }}">
+                        <input type="hidden" name="user_id" id="editUserId" value="{{ old('user_id') }}">
+                    </div>
+                    <div class="mb-3 input-groupedit">
+                        <label for="editShift" class="input-label">Shift</label>
+                        <select name="shift" id="editShift" class="edit-input">
+                            <option value="full-time" @if (old('shift') == 'full-time') selected @endif>Full-time</option>
+                            <option value="part-time" @if (old('shift') == 'part-time') selected @endif>Part-time</option>
+                        </select>
+                        @error('shift')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-3 input-groupedit hide">
+                        <label for="editShiftType" class="input-label">Shift Type</label>
+                        <select name="shift_type" id="editShiftType" class="edit-input">
+                            <option value="morning" @if (old('shift_type') == 'morning') selected @endif>Morning Shift</option>
+                            <option value="afternoon" @if (old('shift_type') == 'afternoon') selected @endif>Afternoon Shift</option>
+                            <option value="evening" @if (old('shift_type') == 'evening') selected @endif>Evening Shift</option>
+                        </select>
+                        @error('shift_type')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-3 input-groupedit">
+                        <label for="editShiftStart" class="input-label">Start Time</label>
+                        <input type="time" name="shift_start" id="editShiftStart" class="edit-input" value="{{ old('shift_start') }}">
+                        @error('shift_start')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-3 input-groupedit">
+                        <label for="editShiftEnd" class="input-label">End Time</label>
+                        <input type="time" name="shift_end" id="editShiftEnd" class="edit-input" value="{{ old('shift_end') }}">
+                        @error('shift_end')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                <div class="button-container">
+                    <button type="submit" class="update-button">Update Schedule</button>
+                    <button type="button" class="cancel-button" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteScheduleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+            </div>
+            <div class="modal-body">
+                <p id="deleteUserText"></p>
+            </div>
+            <div class="button-container">
+                <a href="#" class="delete-buttonn" id="confirmDeleteUser">Yes, Delete</a>
+                <button type="button" class="cancell-button" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
         
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
+    const shiftSelect = document.getElementById('shift');
+    const shiftTypeSelect = document.getElementById('shift_type');
+    const shiftStartInput = document.getElementById('shift_start');
+    const shiftEndInput = document.getElementById('shift_end');
+    const shiftTypeGroup = shiftTypeSelect.parentElement;
+
+    // Function to apply min/max constraints based on shift_type
+    function applyShiftTypeTimeConstraints() {
+        const shiftType = shiftTypeSelect.value;
+
+        if (shiftType === 'morning') {
+            shiftStartInput.setAttribute('min', '06:00');
+            shiftStartInput.setAttribute('max', '11:59');
+            shiftEndInput.setAttribute('min', '06:00');
+            shiftEndInput.setAttribute('max', '11:59');
+        } else if (shiftType === 'afternoon' || shiftType === 'evening') {
+            shiftStartInput.setAttribute('min', '12:00');
+            shiftStartInput.setAttribute('max', '23:59');
+            shiftEndInput.setAttribute('min', '12:00');
+            shiftEndInput.setAttribute('max', '23:59');
+        }
+    }
+
+    function autoSetShiftType() {
+    if (shiftSelect.value === 'full-time') {
+        const shiftStart = shiftStartInput.value;
+        if (shiftStart) {
+            const [hour, minute] = shiftStart.split(':').map(Number);
+            const isMorning = hour < 12;
+            const shiftType = isMorning ? 'morning' : 'afternoon';
+
+            shiftTypeSelect.value = shiftType;
+            document.getElementById('schedule').value = shiftType; // ✅ set hidden input
+
+            applyShiftTypeTimeConstraints();
+        }
+    } else {
+        // For part-time, use manually selected shift_type
+        document.getElementById('schedule').value = shiftTypeSelect.value;
+    }
+}
+
+
+shiftTypeSelect.addEventListener('change', function () {
+    applyShiftTypeTimeConstraints();
+
+    if (shiftSelect.value === 'part-time') {
+        if (shiftTypeSelect.value === 'morning') {
+            shiftStartInput.value = '06:00';
+            document.getElementById('schedule').value = 'morning';
+        } else if (shiftTypeSelect.value === 'afternoon') {
+            shiftStartInput.value = '12:00';
+            document.getElementById('schedule').value = 'afternoon';
+        } else if (shiftTypeSelect.value === 'evening') {
+            shiftStartInput.value = '18:00';
+            document.getElementById('schedule').value = 'evening';
+        }
+    }
+});
+    // Function to enable/disable shift_type and optionally hide it
+    function toggleShiftTypeAccess() {
+        if (shiftSelect.value === 'full-time') {
+            shiftTypeSelect.disabled = true;
+            shiftTypeGroup.classList.add('hide'); // hide shift_type field
+            autoSetShiftType(); // auto-set and apply constraints
+        } else {
+            shiftTypeSelect.disabled = false;
+            shiftTypeGroup.classList.remove('hide');
+            applyShiftTypeTimeConstraints(); // apply constraints manually
+        }
+    }
+
+    // Function to set shift_end time constraints based on shift type
+    function updateShiftEndRange() {
+        const shiftType = shiftSelect.value;
+        const shiftStart = shiftStartInput.value;
+
+        if (!shiftStart) {
+            shiftEndInput.removeAttribute('min');
+            shiftEndInput.removeAttribute('max');
+            return;
+        }
+
+        const [startHour, startMinute] = shiftStart.split(':').map(Number);
+        let minEndHour, maxEndHour;
+
+        if (shiftType === 'full-time') {
+            minEndHour = startHour + 7;
+            maxEndHour = startHour + 8;
+        } else if (shiftType === 'part-time') {
+            minEndHour = startHour + 4;
+            maxEndHour = startHour + 6;
+        }
+
+        // Adjust for 24-hour overflow
+        minEndHour = minEndHour > 23 ? minEndHour - 24 : minEndHour;
+        maxEndHour = maxEndHour > 23 ? maxEndHour - 24 : maxEndHour;
+
+        const minEndTime = `${String(minEndHour).padStart(2, '0')}:${String(startMinute).padStart(2, '0')}`;
+        const maxEndTime = `${String(maxEndHour).padStart(2, '0')}:${String(startMinute).padStart(2, '0')}`;
+
+        shiftEndInput.setAttribute('min', minEndTime);
+        shiftEndInput.setAttribute('max', maxEndTime);
+    }
+
+    // Event listeners
+    shiftSelect.addEventListener('change', () => {
+        toggleShiftTypeAccess();
+        updateShiftEndRange();
+    });
+
+    shiftStartInput.addEventListener('input', () => {
+        autoSetShiftType();
+        updateShiftEndRange();
+    });
+
+    shiftTypeSelect.addEventListener('change', applyShiftTypeTimeConstraints);
+
+    // Initialize on page load
+    toggleShiftTypeAccess();
+    autoSetShiftType();
+    updateShiftEndRange();
+});
+
+
+
+//Edit Schedule Modal
+document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit-btn');
+    const editScheduleModalEl = document.getElementById('editScheduleModal');
+    const editScheduleForm = document.getElementById('editScheduleForm');
+
+    const editScheduleId = document.getElementById('editScheduleId');
+    const editUserId = document.getElementById('editUserId');
+    const editUserName = document.getElementById('editUserName');
+    const editShift = document.getElementById('editShift');
+    const editShiftType = document.getElementById('editShiftType');
+    const editShiftStart = document.getElementById('editShiftStart');
+    const editShiftEnd = document.getElementById('editShiftEnd');
+
+    const editShiftTypeGroup = editShiftType.parentElement;
+
+    // Auto-fill modal on Edit button click
+    editButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const shiftTypeValue = this.getAttribute('data-shift-type');
+
+            editScheduleId.value = this.getAttribute('data-id');
+            editUserId.value = this.getAttribute('data-user-id');
+            editUserName.value = this.getAttribute('data-user-name');
+            editShift.value = this.getAttribute('data-shift');
+
+            // Set shift type from data
+            [...editShiftType.options].forEach(option => {
+                option.selected = option.value === shiftTypeValue;
+            });
+
+            editShiftStart.value = this.getAttribute('data-shift-start');
+            editShiftEnd.value = this.getAttribute('data-shift-end');
+
+            toggleEditShiftTypeAccess();
+
+            // Only auto-set if shift type is empty (mostly for full-time)
+            if (!shiftTypeValue) {
+                autoSetEditShiftType();
+            }
+
+            updateEditShiftEndRange();
+        });
+    });
+
+    // Show modal if there were validation errors from the edit form
+    @if ($errors->has('id'))
+        const editScheduleModal = new bootstrap.Modal(editScheduleModalEl);
+        editScheduleModal.show();
+
+        editUserId.value = "{{ old('user_id') }}";
+        editUserName.value = "{{ old('user_name') }}";
+        editShift.value = "{{ old('shift') }}";
+        editShiftType.value = "{{ old('shift_type') }}";
+        editShiftStart.value = "{{ old('shift_start') }}";
+        editShiftEnd.value = "{{ old('shift_end') }}";
+
+        toggleEditShiftTypeAccess();
+        autoSetEditShiftType();
+        updateEditShiftEndRange();
+    @endif
+
+    // Helper Functions
+    function applyEditShiftTypeTimeConstraints() {
+    const shift = editShift.value;
+    const shiftType = editShiftType.value;
+
+    // Don't apply time limits for full-time
+    if (shift === "full-time") {
+        editShiftStart.removeAttribute("min");
+        editShiftStart.removeAttribute("max");
+        editShiftEnd.removeAttribute("min");
+        editShiftEnd.removeAttribute("max");
+        return;
+    }
+
+    // Apply limits for part-time only
+    if (shiftType === "morning") {
+        editShiftStart.setAttribute("min", "06:00");
+        editShiftStart.setAttribute("max", "11:59");
+        editShiftEnd.setAttribute("min", "06:00");
+        editShiftEnd.setAttribute("max", "11:59");
+    } else if (shiftType === "afternoon" || shiftType === "evening") {
+        editShiftStart.setAttribute("min", "12:00");
+        editShiftStart.setAttribute("max", "23:59");
+        editShiftEnd.setAttribute("min", "12:00");
+        editShiftEnd.setAttribute("max", "23:59");
+    }
+}
+
+
+    function autoSetEditShiftType() {
+    if (editShift.value === "full-time") {
+        const shiftStart = editShiftStart.value;
+        if (shiftStart) {
+            const [hour] = shiftStart.split(":").map(Number);
+
+            // FORCING afternoon if start is in AM (less than 12), and it’s full-time
+            if (hour >= 0 && hour < 12) {
+                editShiftType.value = "afternoon"; // <- Schedule to update
+            } else {
+                editShiftType.value = "morning"; // <- Schedule to update
+            }
+        }
+        editShiftType.disabled = true;
+    } else {
+        editShiftType.disabled = false;
+    }
+}
+
+
+function toggleEditShiftTypeAccess() {
+    if (editShift.value === "full-time") {
+        editShiftType.disabled = true;
+        editShiftTypeGroup.classList.add("hide");
+        autoSetEditShiftType();
+
+        // 🧼 Clear min/max time constraints
+        editShiftStart.removeAttribute("min");
+        editShiftStart.removeAttribute("max");
+        editShiftEnd.removeAttribute("min");
+        editShiftEnd.removeAttribute("max");
+    } else {
+        editShiftType.disabled = false;
+        editShiftTypeGroup.classList.remove("hide");
+        applyEditShiftTypeTimeConstraints(); // Only applies to part-time
+    }
+}
+
+
+    function updateEditShiftEndRange() {
+        const shiftType = editShift.value;
+        const shiftStart = editShiftStart.value;
+
+        if (!shiftStart) {
+            editShiftEnd.removeAttribute("min");
+            editShiftEnd.removeAttribute("max");
+            return;
+        }
+
+        const [startHour, startMinute] = shiftStart.split(":").map(Number);
+        let minEndHour, maxEndHour;
+
+        if (shiftType === "full-time") {
+            minEndHour = startHour + 7;
+            maxEndHour = startHour + 8;
+        } else if (shiftType === "part-time") {
+            minEndHour = startHour + 4;
+            maxEndHour = startHour + 6;
+        }
+
+        minEndHour = minEndHour > 23 ? minEndHour - 24 : minEndHour;
+        maxEndHour = maxEndHour > 23 ? maxEndHour - 24 : maxEndHour;
+
+        const minEndTime = `${String(minEndHour).padStart(2, "0")}:${String(startMinute).padStart(2, "0")}`;
+        const maxEndTime = `${String(maxEndHour).padStart(2, "0")}:${String(startMinute).padStart(2, "0")}`;
+
+        editShiftEnd.setAttribute("min", minEndTime);
+        editShiftEnd.setAttribute("max", maxEndTime);
+    }
+
+    // Bind changes
+    editShift.addEventListener("change", () => {
+        toggleEditShiftTypeAccess();
+        updateEditShiftEndRange();
+    });
+
+    editShiftStart.addEventListener("input", () => {
+        autoSetEditShiftType();
+        updateEditShiftEndRange();
+    });
+
+    editShiftType.addEventListener("change", () => {
+    applyEditShiftTypeTimeConstraints();
+
+    // If part-time, auto-fill start time based on selected shift type
+    if (editShift.value === "part-time") {
+        if (editShiftType.value === "morning") {
+            editShiftStart.value = "06:00";
+        } else if (editShiftType.value === "afternoon") {
+            editShiftStart.value = "12:00";
+        } else if (editShiftType.value === "evening") {
+            editShiftStart.value = "18:00";
+        }
+
+        updateEditShiftEndRange(); // Update end range accordingly
+    }
+});
+
+
+    // Initialize constraints
+    toggleEditShiftTypeAccess();
+    autoSetEditShiftType();
+    updateEditShiftEndRange();
+});
+
+// Show modal if edit form had errors
+document.addEventListener('DOMContentLoaded', function () {
+    @if ($errors->any() && session('form_error') === 'edit')
+        const editScheduleModalEl = document.getElementById('editScheduleModal');
+        const editModal = new bootstrap.Modal(editScheduleModalEl);
+        editModal.show();
+    @endif
+});
+
+    document.addEventListener("DOMContentLoaded", function () {
                 function showSuccessMessage(message) {
                     var successMessage = document.createElement("div");
                     successMessage.className = "alert alert-success fade show"; // Bootstrap alert classes
@@ -494,109 +1115,48 @@
                 }
             });
 
-             // Function to handle shift type change and adjust time ranges for start and end times
-    document.getElementById('shift_type').addEventListener('change', function() {
-        var shiftType = this.value;
-        var startTimeInput = document.getElementById('shift_start');
-        var endTimeInput = document.getElementById('shift_end');
-        
-        if (shiftType === 'morning') {
-            // Morning shift: Only AM times allowed
-            startTimeInput.setAttribute('min', '06:00'); // Start from 6:00 AM
-            startTimeInput.setAttribute('max', '11:59'); // End at 11:59 AM
-            endTimeInput.setAttribute('min', '06:00'); // Ensure shift end is after start
-            endTimeInput.setAttribute('max', '11:59'); // End at 11:59 AM
-        } else if (shiftType === 'afternoon' || shiftType === 'night') {
-            // Afternoon & Night shifts: Only PM times allowed
-            startTimeInput.setAttribute('min', '12:00'); // Start from 12:00 PM
-            startTimeInput.setAttribute('max', '23:59'); // End at 11:59 PM
-            endTimeInput.setAttribute('min', '12:00'); // Ensure shift end is after start
-            endTimeInput.setAttribute('max', '23:59'); // End at 11:59 PM
-        }
+            document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".delete-btn").forEach(function (button) {
+            button.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default link behavior
+
+                const deleteUserId = this.getAttribute("data-schedule-id");
+                const userName = this.getAttribute("data-schedule-name");
+
+                // Update modal text
+                document.getElementById("deleteUserText").innerHTML =
+                    `Are you sure you want to delete <strong>${userName}</strong>? This action cannot be undone.`;
+
+                // Update confirmation link
+                const deleteUrl = "{{ url('/admin/schedules/delete') }}/" + deleteUserId;
+                document.getElementById("confirmDeleteUser").setAttribute("href", deleteUrl);
+
+                // Show modal
+                const deleteScheduleModal = new bootstrap.Modal(document.getElementById("deleteScheduleModal"));
+                deleteScheduleModal.show();
+            });
+        });
     });
-
-    // Trigger the change event to set the initial time range when the page loads
-    document.getElementById('shift_type').dispatchEvent(new Event('change'));
-
-    // Ensure that the shift end time is always after the shift start time
-    document.getElementById('shift_start').addEventListener('input', function() {
-        var startTime = this.value;
-        var endTimeInput = document.getElementById('shift_end');
-        var minEndTime = (startTime === '23:59') ? '23:59' : (parseInt(startTime.split(':')[0]) + 1) + ':00'; // Ensure end time is at least 1 hour after start time
-
-        endTimeInput.setAttribute('min', minEndTime);
-    });
-
     document.addEventListener("DOMContentLoaded", function () {
-        const shiftTypeSelect = document.getElementById('shift');
-        const shiftStartInput = document.getElementById('shift_start');
-        const shiftEndInput = document.getElementById('shift_end');
+    const searchInput = document.getElementById("searchInput");
+    const cards = document.querySelectorAll(".cardL");
 
-        // Function to update the shift_end range based on shift type and shift_start
-        function updateShiftEndRange() {
-            const shiftType = shiftTypeSelect.value;
-            const shiftStart = shiftStartInput.value;
+    searchInput.addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
 
-            if (!shiftStart) {
-                shiftEndInput.removeAttribute('min');
-                shiftEndInput.removeAttribute('max');
-                return;
-            }
+        cards.forEach(card => {
+            const name = card.querySelector(".user-name")?.textContent.toLowerCase() || "";
+            const shiftInfo = card.querySelector(".shift-info")?.textContent.toLowerCase() || "";
 
-            const [startHour, startMinute] = shiftStart.split(':').map(Number);
-            let minEndHour, maxEndHour;
+            // Combine all searchable fields
+            const fullText = `${name} ${shiftInfo}`;
 
-            if (shiftType === 'full-time') {
-                // Full-time: 7-8 hours range
-                minEndHour = startHour + 7;
-                maxEndHour = startHour + 8;
-            } else if (shiftType === 'part-time') {
-                // Part-time: 4-6 hours range
-                minEndHour = startHour + 4;
-                maxEndHour = startHour + 6;
-            }
+            // Show/hide based on search match
+            card.style.display = fullText.includes(searchTerm) ? "grid" : "none";
 
-            // Ensure the hours don't exceed 24 (midnight)
-            minEndHour = minEndHour > 24 ? minEndHour - 24 : minEndHour;
-            maxEndHour = maxEndHour > 24 ? maxEndHour - 24 : maxEndHour;
-
-            // Format the min and max times for the shift_end input
-            const minEndTime = `${String(minEndHour).padStart(2, '0')}:${String(startMinute).padStart(2, '0')}`;
-            const maxEndTime = `${String(maxEndHour).padStart(2, '0')}:${String(startMinute).padStart(2, '0')}`;
-
-            shiftEndInput.setAttribute('min', minEndTime);
-            shiftEndInput.setAttribute('max', maxEndTime);
-        }
-
-        // Event listeners for shift type and shift_start changes
-        shiftTypeSelect.addEventListener('change', updateShiftEndRange);
-        shiftStartInput.addEventListener('input', updateShiftEndRange);
-
-        // Trigger the update on page load
-        updateShiftEndRange();
+        });
     });
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const shiftSelect = document.getElementById('shift');
-        const shiftTypeSelect = document.getElementById('shift_type');
-
-        // Function to toggle the shift_type dropdown
-        function toggleShiftType() {
-            if (shiftSelect.value === 'full-time') {
-                shiftTypeSelect.disabled = true; // Disable shift_type
-            } else {
-                shiftTypeSelect.disabled = false; // Enable shift_type
-            }
-        }
-
-        // Add event listener to the shift dropdown
-        shiftSelect.addEventListener('change', toggleShiftType);
-
-        // Trigger the toggle function on page load
-        toggleShiftType();
-    });
-
-
+});
         </script>
 
 
