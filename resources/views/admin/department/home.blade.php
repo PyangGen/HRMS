@@ -69,7 +69,7 @@ body, .container {
         padding: 15px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         display: grid;
-        grid-template-columns: 1fr 1fr 2fr 1fr auto auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr auto auto;
         align-items: center;
         column-gap: 10px;
         width: 100.5%;

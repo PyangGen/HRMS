@@ -79,6 +79,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('admin/payrolls/store', [PayrollController::class, 'store'])->name('admin/payrolls/store');
     Route::get('/get-user-data/{id}', [App\Http\Controllers\PayrollController::class, 'getUserData']);
     Route::get('admin.payroll.index', [PayrollController::class, 'index'])->name('admin.payroll.index');
+    Route::get('/admin/payrolls/fetch-hours', [PayrollController::class, 'fetchHours']);
+
     
 
 

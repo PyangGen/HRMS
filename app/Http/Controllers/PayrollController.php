@@ -13,7 +13,7 @@ class PayrollController extends Controller
     {
         $total = Payroll::count();
         $users = User::where('usertype', 'user')->get(); // ← add this
-        $payrolls = Payroll::with('user')->orderBy('id', 'desc')->paginate(8);
+        $payrolls = Payroll::with('user')->orderBy('id', 'desc')->paginate(7);
 
         return view('admin.payroll.index', compact('payrolls', 'total', 'users'));
     }
@@ -80,6 +80,31 @@ public function destroy($id)
     $payroll->delete();
 
     return response()->json(['message' => 'Payroll deleted successfully.']);
+}
+public function fetchHours(Request $request)
+{
+    $userId = $request->query('user_id');
+    $month = $request->query('month'); // format: YYYY-MM
+
+    if (!$userId || !$month) {
+        return response()->json(['success' => false, 'message' => 'Missing parameters.']);
+    }
+
+    try {
+        $startOfMonth = Carbon::createFromFormat('Y-m', $month)->startOfMonth();
+        $endOfMonth = Carbon::createFromFormat('Y-m', $month)->endOfMonth();
+
+        $totalHours = Attendance::where('user_id', $userId)
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->sum('hours');
+
+        return response()->json([
+            'success' => true,
+            'total_hours' => $totalHours
+        ]);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => $e->getMessage()]);
+    }
 }
 
 

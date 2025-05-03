@@ -8,10 +8,11 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     margin-top: 2rem;
-    max-width: 860px;  /* Set a max width for the chart card */
-    width: 100%;
+    max-width: 750px;
+    width: 95%;
     max-height: 480px;
-    margin-left: 60px;
+    transform: translateX(-50px);
+    margin-right: -25px; /* Changed from 60px to 10px for a 50px left shift */
 }
 
 /* Make sure the canvas fits within the card */
@@ -31,14 +32,15 @@
     background-color: #fff;
     border-radius: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    max-width: 400px;  /* smaller width */
-    width: 90%;
+    width: calc(80% - 220px);
+    max-width: none;
     overflow: hidden;
-    padding: 1rem;     /* Adjust padding for compactness */
-    margin-left: 275px;
+    padding: 1rem;
+    margin-left: 175px;
     display: flex;
     flex-direction: column;
 }
+
 
 /* Profile Header */
 .profile-header {
@@ -196,7 +198,7 @@
 
 /* Ensure profile card stays as-is */
 .profile-card-container {
-    flex: 0 0 350px;
+    flex: 1;
 }
 
 /* RESPONSIVE STYLES */

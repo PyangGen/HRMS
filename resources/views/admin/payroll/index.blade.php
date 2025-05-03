@@ -233,6 +233,24 @@
         color: white;
         border: none;
     }
+    .pagination a, 
+.pagination span {
+    color: #1E1E8F !important; /* Change text color */
+    margin-left: 1020px;
+    margin-top: -40px;
+}
+
+.pagination .active span {
+    background-color: #1E1E8F !important; /* Active background */
+    border-color: #1E1E8F !important;
+    color: white !important; /* Active text color */
+}
+
+.pagination a:hover {
+    background-color: #1E1E8F !important;
+    color: white !important;
+    border-color: #1E1E8F !important;
+}
 </style>
 <x-app-layout>
     <div class="main-content">
@@ -322,6 +340,11 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="mb-3">
+                <label for="month">Month</label>
+                <input type="month" name="month" id="month" class="form-control">
+            </div>
+
                 <div class="mb-3">
                     <label>Total Hours</label>
                     <input type="text" name="total_hours" id="total_hours" class="form-control" readonly>
@@ -443,38 +466,33 @@
             });
         });
 
-        document.getElementById('employee_select').addEventListener('change', function () {
-            const userId = this.value;
+        document.getElementById('employee_select').addEventListener('change', fetchTotalHours);
+    document.getElementById('month').addEventListener('change', fetchTotalHours);
 
-            if (!userId) {
-                document.getElementById('total_hours').value = '';
-                return;
-            }
+    function fetchTotalHours() {
+        const userId = document.getElementById('employee_select').value;
+        const month = document.getElementById('month').value; // format: YYYY-MM
 
-            fetch(`/get-user-data/${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Set total_hours field
+        if (!userId || !month) {
+            document.getElementById('total_hours').value = '';
+            return;
+        }
+
+        fetch(`/admin/payrolls/fetch-hours?user_id=${userId}&month=${month}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
                     document.getElementById('total_hours').value = data.total_hours;
-                })
-                .catch(error => {
-                    console.error('Failed to fetch total hours:', error);
-                });
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            // Add click listener to all delete buttons
-            document.querySelectorAll('.remove-payroll-btn').forEach(button => {
-                button.addEventListener('click', function (e) {
-                    e.preventDefault();
-
-                    // Find the closest .cardL and remove it
-                    const card = button.closest('.cardL');
-                    if (card) {
-                        card.remove();
-                    }
-                });
+                    // Trigger recalculation if salary/hour already set
+                    document.getElementById('salary_per_hour').dispatchEvent(new Event('input'));
+                } else {
+                    alert('Failed to fetch hours.');
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching hours:', err);
             });
-        });
+    }
         document.addEventListener('DOMContentLoaded', function () {
             let cardToDeleteId = null;
             let payrollIdToDelete = null;

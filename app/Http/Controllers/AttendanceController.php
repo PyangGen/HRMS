@@ -21,9 +21,10 @@ class AttendanceController extends Controller
     
         $schedule = $user->schedule; // if using schedules
     
-        $attendanceHistory = Attendance::where('user_id', $user->id)
-            ->orderBy('time_in', 'desc')
-            ->paginate(5); // show 5 records per page
+        $attendanceHistory = Attendance::where('user_id', auth()->id())
+    ->orderBy('created_at', 'desc')
+    ->paginate(4); // or whatever pagination you're using
+
     
         return view('attendance.index', compact('attendance', 'schedule', 'attendanceHistory', 'user'));
     }

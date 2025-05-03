@@ -903,7 +903,7 @@ use Illuminate\Support\Facades\Storage;
                 <label class="email-label"><img src="{{ asset('images/envelope.svg') }}"/>{{ $user->email }}</label>
                 <label class="phone-label">
                     <img src="{{ asset('images/telephone.svg') }}" />
-                    <span>+639{{ $user->contact_number }}</span>
+                    <span>+63{{ $user->contact_number }}</span>
                 </label>
 
                 </div>
@@ -1156,8 +1156,13 @@ use Illuminate\Support\Facades\Storage;
                             </div>
                             <div class="mb-3 input-groupedit">
                                 <label for="editName" class="input-label">Department</label>
-                                <input type="text" id="editDepartment" name="department" class=" edit-input"
-                                    placeholder="Department">
+                                
+                                    <select name="department" class=" edit-input" id="editDepartment" value="{{ old('department') }}" required autocomplete="department">
+                            <option value="" disabled selected>Select Department</option>
+                            @foreach($departments as $department)
+                                <option value="{{ $department->dept_name }}">{{ $department->dept_name }}</option>
+                            @endforeach
+                        </select>
                             </div>
                             <div class="mb-3 input-groupedit">
                                 <label for="editName" class="input-label">Position</label>
@@ -1289,7 +1294,7 @@ use Illuminate\Support\Facades\Storage;
                     <div class="mb-4 input-container">
                         <label for="contact_number" class="contact-label">Contact Number</label>
                         <div class="input-groupp custom-input-wrapper" onclick="document.getElementById('contact_number').focus()">
-                            <span class="input-prefix">+639</span>
+                            <span class="input-prefix">+63</span>
                             <input type="text" name="contact_number" id="contact_number"
                                 value="{{ old('contact_number') }}"
                                 placeholder="Enter 9-digit number"

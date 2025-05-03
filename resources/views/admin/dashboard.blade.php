@@ -11,10 +11,36 @@
     $lateIn = DB::table('attendances')->whereDate('created_at', $today)->where('request', 'late_in')->count();
     $overtime = DB::table('attendances')->whereDate('created_at', $today)->where('request', 'overtime')->count();
 
-    $departments = DB::table('departments')
-        ->select('dept_name', DB::raw('count(*) as total'))
-        ->groupBy('dept_name')
-        ->get();
+    // Get employees count by department per month
+    $employeesByDeptMonthly = DB::table('users')
+        ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, department, COUNT(*) as total")
+        ->where('usertype', 'user')
+        ->groupBy('month', 'department')
+        ->orderBy('month')
+        ->get()
+        ->groupBy('department');
+
+    $months = $employeesByDeptMonthly->flatMap(function ($items) {
+        return $items->pluck('month');
+    })->unique()->sort()->values();
+
+    $colors = ['#3B82F6', '#F59E0B', '#10B981', '#EF4444', '#8B5CF6', '#F472B6', '#0EA5E9'];
+    $datasets = [];
+    $colorIndex = 0;
+
+    foreach ($employeesByDeptMonthly as $department => $records) {
+        $monthlyData = [];
+        foreach ($months as $month) {
+            $record = $records->firstWhere('month', $month);
+            $monthlyData[] = $record ? $record->total : 0;
+        }
+
+        $datasets[] = [
+            'label' => $department,
+            'data' => $monthlyData,
+            'backgroundColor' => $colors[$colorIndex++ % count($colors)]
+        ];
+    }
 @endphp
 
 <x-app-layout>
@@ -76,12 +102,10 @@
 </div>
 
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-    <div class="dashboard-cardd card-chart">
-        <h3 class="chart-title">Departments</h3>
-        <canvas id="departmentPieChart" class="chart-canvas"></canvas>
-    </div>
+<div class="dashboard-cardd card-chart w-full">
+    <canvas id="employeeDeptMonthlyChart" class="chart-canvas"></canvas>
 </div>
+
 
 
                     </div>
@@ -91,28 +115,51 @@
 
             <!-- Chart.js Pie -->
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-                const pieCtx = document.getElementById('departmentPieChart').getContext('2d');
-                new Chart(pieCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: {!! json_encode($departments->pluck('dept_name')) !!},
-                        datasets: [{
-                            data: {!! json_encode($departments->pluck('total')) !!},
-                            backgroundColor: [
-                                '#3B82F6', '#F59E0B', '#10B981', '#EF4444', '#8B5CF6', '#F472B6', '#0EA5E9'
-                            ],
-                        }]
-                    },
-                    options: {
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
+<script>
+    const ctx = document.getElementById('employeeDeptMonthlyChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($months) !!},
+            datasets: {!! json_encode($datasets) !!}
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Employees by Department per Month'
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    title: {
+                        display: true,
+                        text: 'Month'
                     }
-                });
-            </script>
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Number of Employees'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
         @endif
     @endauth
 </x-app-layout>
@@ -312,18 +359,29 @@
 .dashboard-cardd.card-chart {
     background-color: #ffffff;
     border-radius: 1rem;
-    padding: 1.5rem 1.5rem 2rem;
+    padding: 1.5rem;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0; /* gray-200 */
+    border: 1px solid #e2e8f0;
     width: 100%;
-    max-width: 500px;
+    height: 100%;
+    min-height: 500px; /* Ensure visible height */
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* changed from center to left align */
+    justify-content: stretch;
+    align-items: stretch;
     transition: transform 0.2s ease-in-out;
-    margin-left: 0; /* remove auto centering */
+    margin-left: 0;
     margin-top: 2rem;
 }
+
+.chart-canvas {
+    flex: 1 1 auto;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+
 
 
 .dashboard-cardd.card-chart:hover {
