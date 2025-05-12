@@ -629,7 +629,7 @@
                             <select name="shift_type" id="shift_type">
                                 <option value="morning">Morning Shift</option>
                                 <option value="afternoon">Afternoon Shift</option>
-                                <option value="evening">Evening Shift</option>
+                                <option value="evening">Night Shift</option>
                             </select>
                             @error('shift_type')
                             <span class="text-danger">{{ $message }}</span>
@@ -693,7 +693,7 @@
                         <select name="shift_type" id="editShiftType" class="edit-input">
                             <option value="morning" @if (old('shift_type') == 'morning') selected @endif>Morning Shift</option>
                             <option value="afternoon" @if (old('shift_type') == 'afternoon') selected @endif>Afternoon Shift</option>
-                            <option value="evening" @if (old('shift_type') == 'evening') selected @endif>Evening Shift</option>
+                            <option value="evening" @if (old('shift_type') == 'evening') selected @endif>Night Shift</option>
                         </select>
                         @error('shift_type')
                             <span class="text-danger">{{ $message }}</span>
